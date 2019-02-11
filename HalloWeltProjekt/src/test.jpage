@@ -1,0 +1,5 @@
+System.out.println(7 % 2);
+
+if ((7 % 2) == 1) - ungerade / odd
+if ((7 % 2) == 0) - gerade / even
+
