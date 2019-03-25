@@ -21,6 +21,7 @@ public class QuickSort {
 		int i = 0; // geändert!!
 		int j = 0; // auch hier
 		//
+		/*
 		do {
 			// Suche von links ein Element, welches größer als das Pivotelement ist
 			while (i < rechts -1 && zahlen[XYZ] < pivot) {
@@ -36,10 +37,11 @@ public class QuickSort {
 			}
 		} while (i < j);
 		//
-		if (zahlen[XYZ] > pivot) {
+		//if (zahlen[XYZ] > pivot) {
           //tausche daten[i] mit pivot
 		}
 		//
+		 * */
 		return i;
 	}
 
