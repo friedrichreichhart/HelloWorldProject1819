@@ -1,6 +1,10 @@
 package data;
 
+import java.util.ArrayList;
+
 public class Person {
+	//
+	private static ArrayList<Person> personenListe = new ArrayList<>();
 	//
 	private String vorname;
 	private String nachname;
@@ -37,4 +41,9 @@ public class Person {
 		return getNachname() + ", " + getVorname() + " (" 
 				+ getPlz() + " " + getOrt() + ")";
 	}
+	//
+	public static ArrayList<Person> getPersonenListe() {
+		return personenListe;
+	}
+
 }

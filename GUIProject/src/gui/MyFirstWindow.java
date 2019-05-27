@@ -139,7 +139,20 @@ public class MyFirstWindow {
 				p.setVorname(getVornameTF().getText());
 				p.setNachname(getNachnameTF().getText());
 				//
+				System.out.println("----------");
+				System.out.println("Objekt:");
 				System.out.println(p);
+				//
+				Person.getPersonenListe().add(p);
+				//
+				System.out.println("----------");
+				System.out.println("Liste:");
+				System.out.println(Person.getPersonenListe());
+				//
+				// finally clean fields
+				getVornameTF().setText("");
+				getNachnameTF().setText("");
+				//
 			}
 		});
 		btnSaveClean.setBounds(129, 10, 83, 35);
