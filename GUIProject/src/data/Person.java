@@ -2,14 +2,16 @@ package data;
 
 import java.util.ArrayList;
 
+import com.google.gson.annotations.Expose;
+
 public class Person {
 	//
 	private static ArrayList<Person> personenListe = new ArrayList<>();
 	//
 	private String vorname;
 	private String nachname;
-	private String plz;
-	private String ort;
+	private String plz = null;
+	private String ort = null;
 	//
 	public String getVorname() {
 		return vorname;

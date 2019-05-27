@@ -3,12 +3,19 @@ package gui;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Button;
+
+import java.io.File;
+import java.io.FileWriter;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.Text;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import data.Person;
 
@@ -30,6 +37,7 @@ public class MyFirstWindow {
 
 	/**
 	 * Launch the application.
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -63,7 +71,7 @@ public class MyFirstWindow {
 		shlFrWindow = new Shell();
 		shlFrWindow.setSize(450, 300);
 		shlFrWindow.setText("FR Window");
-		
+
 		Button button1 = new Button(shlFrWindow, SWT.NONE);
 		button1.addMouseMoveListener(new MouseMoveListener() {
 			public void mouseMove(MouseEvent me) {
@@ -86,49 +94,49 @@ public class MyFirstWindow {
 		});
 		button1.setBounds(10, 10, 100, 35);
 		button1.setText("Mein 1. Knopf");
-		
+
 		vornameTF = new Text(shlFrWindow, SWT.BORDER);
 		vornameTF.setBounds(92, 51, 76, 21);
-		
+
 		Label lblVorname = new Label(shlFrWindow, SWT.NONE);
 		lblVorname.setBounds(31, 54, 55, 15);
 		lblVorname.setText("Vorname");
-		
+
 		Label lblNachname = new Label(shlFrWindow, SWT.NONE);
 		lblNachname.setBounds(20, 87, 66, 15);
 		lblNachname.setText("Nachname");
-		
+
 		nachnameTF = new Text(shlFrWindow, SWT.BORDER);
 		nachnameTF.setBounds(92, 81, 76, 21);
-		
+
 		lblPlz = new Label(shlFrWindow, SWT.NONE);
 		lblPlz.setBounds(31, 120, 55, 15);
 		lblPlz.setText("PLZ");
-		
+
 		lblOrt = new Label(shlFrWindow, SWT.NONE);
 		lblOrt.setBounds(31, 159, 55, 15);
 		lblOrt.setText("Ort");
-		
+
 		lblStrasse = new Label(shlFrWindow, SWT.NONE);
 		lblStrasse.setBounds(31, 203, 55, 15);
 		lblStrasse.setText("Strasse");
-		
+
 		lblHausnummer = new Label(shlFrWindow, SWT.NONE);
 		lblHausnummer.setBounds(31, 224, 55, 15);
 		lblHausnummer.setText("Hausnummer");
-		
+
 		plzTF = new Text(shlFrWindow, SWT.BORDER);
 		plzTF.setBounds(92, 117, 76, 21);
-		
+
 		ortTF = new Text(shlFrWindow, SWT.BORDER);
 		ortTF.setBounds(92, 156, 76, 21);
-		
+
 		vornameOut = new Label(shlFrWindow, SWT.NONE);
 		vornameOut.setBounds(204, 57, 55, 15);
-		
+
 		nachnameOut = new Label(shlFrWindow, SWT.NONE);
 		nachnameOut.setBounds(204, 87, 55, 15);
-		
+
 		Button btnSaveClean = new Button(shlFrWindow, SWT.NONE);
 		btnSaveClean.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -158,22 +166,55 @@ public class MyFirstWindow {
 		btnSaveClean.setBounds(129, 10, 83, 35);
 		btnSaveClean.setText("Save & Clean");
 
+		Button btnNewButton = new Button(shlFrWindow, SWT.NONE);
+		btnNewButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				Gson gson = new GsonBuilder().setPrettyPrinting().create();
+				gson.serializeNulls();
+				//
+				String jsonString = gson.toJson(Person.getPersonenListe());
+				System.out.println(jsonString);
+				//
+				// im explorer %TEMP%
+				//
+				try {
+					FileWriter fw = new FileWriter(File.createTempFile("wpfjson", ".json"));
+					//
+					gson.toJson(Person.getPersonenListe(),fw);
+					//
+					fw.flush();
+					fw.close();
+				} catch (Exception ex) {
+				}
+
+			}
+		});
+		btnNewButton.setBounds(235, 10, 76, 35);
+		btnNewButton.setText("2JSON");
+
 	}
+
 	public Label getVornameOut() {
 		return vornameOut;
 	}
+
 	public Label getNachnameOut() {
 		return nachnameOut;
 	}
+
 	public Text getVornameTF() {
 		return vornameTF;
 	}
+
 	public Text getNachnameTF() {
 		return nachnameTF;
 	}
+
 	public Text getPlzTF() {
 		return plzTF;
 	}
+
 	public Text getOrtTF() {
 		return ortTF;
 	}
