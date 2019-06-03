@@ -1,6 +1,7 @@
 package gui;
 
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Button;
 
@@ -192,6 +193,29 @@ public class MyFirstWindow {
 		});
 		btnNewButton.setBounds(235, 10, 76, 35);
 		btnNewButton.setText("2JSON");
+		
+		Button btnFromjson = new Button(shlFrWindow, SWT.NONE);
+		btnFromjson.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				//
+				FileDialog fd = new FileDialog(shlFrWindow,SWT.OPEN);
+				fd.setFilterPath(System.getProperty("java.io.tmpdir"));
+				//
+				fd.setFilterNames(new String[] { "WPF-INF-Json" });
+				fd.setFilterExtensions(new String[] { "*.json" });
+				//
+				String fileName = fd.open();
+				System.out.println(fileName);
+				//
+				if (fileName != null) {
+					// filename ausgewaehlt
+					Person.loadPersonenFromFile(fileName);
+				}
+			}
+		});
+		btnFromjson.setBounds(329, 10, 75, 35);
+		btnFromjson.setText("FromJSON");
 
 	}
 
